@@ -1,7 +1,7 @@
 package com.tianshuang.miaoxin
 
 import android.Manifest
-import android.content.ContentResolver
+import android.content.ContentUris
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -67,8 +67,8 @@ private fun eventOverride(context: Context, date: LocalDate): Boolean? {
     val start = date.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
     val end = date.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
     val uri = CalendarContract.Instances.CONTENT_URI.buildUpon().apply {
-        ContentResolver.appendId(this, start)
-        ContentResolver.appendId(this, end)
+        ContentUris.appendId(this, start)
+        ContentUris.appendId(this, end)
     }.build()
     val projection = arrayOf(CalendarContract.Instances.TITLE)
     runCatching {
